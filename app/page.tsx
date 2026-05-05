@@ -16,13 +16,36 @@ import {
   SiNodedotjs,
   SiLaravel,
   SiOpenai,
-  SiVscodium,
   SiClaude,
   SiTelegram,
 } from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { ThemeToggle } from "@/components/ThemeToggle";
+
+const CursorLogoIcon = ({ size = 20, className }: { size?: number; className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    className={className}
+    aria-hidden="true"
+  >
+    <rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="currentColor" opacity="0.12" />
+    <path
+      d="M7.2 8.2L11.9 12 7.2 15.8 8.8 17.2 15.2 12 8.8 6.8 7.2 8.2z"
+      fill="currentColor"
+    />
+    <path
+      d="M13.2 7.2h3.6v3.6h-1.8V9h-1.8V7.2zm0 9.6h1.8V15h1.8v1.8h-3.6z"
+      fill="currentColor"
+      opacity="0.85"
+    />
+  </svg>
+);
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -32,6 +55,7 @@ export default function Home() {
   const [isLensExpanded, setIsLensExpanded] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
     AOS.init({
@@ -64,6 +88,7 @@ export default function Home() {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
       setScrollProgress(Math.min(100, Math.max(0, progress)));
+      setShowScrollTop(scrollTop > 260);
 
       clearTimeout(scrollTimer);
       scrollTimer = setTimeout(() => {
@@ -100,9 +125,15 @@ export default function Home() {
 
   return (
     <div className="min-h-screen text-zinc-900 dark:text-zinc-100 font-sans pb-32 transition-colors duration-300">
+      <div className="fixed top-0 left-0 z-[70] h-[2px] w-full bg-black/5 dark:bg-white/10 pointer-events-none">
+        <div
+          className={`h-full bg-zinc-900 dark:bg-zinc-100 transition-all duration-150 ${isScrolling ? "opacity-100" : "opacity-0"}`}
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
       <div className="max-w-[768px] mx-auto border-x border-black/[0.04] dark:border-white/[0.04] min-h-screen flex flex-col relative">
         
-        <header className="sticky top-0 z-50 flex items-center justify-between px-6 pt-6 pb-4 bg-zinc-50/85 dark:bg-white/[0.04] backdrop-blur-md border-b border-black/[0.04] dark:border-white/[0.04] transition-colors duration-300">
+        <header className="sticky top-0 z-50 flex items-center justify-between px-4 sm:px-6 pt-6 pb-4 bg-zinc-50/85 dark:bg-white/[0.04] backdrop-blur-md border-b border-black/[0.04] dark:border-white/[0.04] transition-colors duration-300">
           <div className="flex-1">
             <img
               src="/imgaes/C5725E55-54EF-4952-91F5-7E25040B5672_1_105_c.jpeg"
@@ -113,6 +144,7 @@ export default function Home() {
           <nav className="flex items-center gap-5 text-sm text-zinc-500 dark:text-zinc-400">
             <div className="hidden md:flex items-center gap-5">
               <a href="#about" className="text-zinc-900 dark:text-zinc-100 font-medium">About</a>
+              <a href="#services" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">Services</a>
               <a href="#experience" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors font-medium text-zinc-900 dark:text-zinc-100">Experience</a>
               <a href="#education" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">Education</a>
               <a href="#projects" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">Projects</a>
@@ -125,12 +157,6 @@ export default function Home() {
               </button>
             </div>
           </nav>
-          <div className="absolute bottom-0 left-0 h-[2px] w-full bg-black/5 dark:bg-white/10 overflow-hidden">
-            <div
-              className={`h-full bg-zinc-900 dark:bg-zinc-100 transition-all duration-150 ${isScrolling ? "opacity-100" : "opacity-0"}`}
-              style={{ width: `${scrollProgress}%` }}
-            />
-          </div>
         </header>
 
         {/* Mobile Sidebar Navigation */}
@@ -141,6 +167,7 @@ export default function Home() {
             </button>
             <nav className="flex flex-col items-center gap-10 text-2xl tracking-tight">
               <a href="#about" className="font-medium text-zinc-900 dark:text-zinc-100" onClick={() => setIsMobileMenuOpen(false)}>About</a>
+              <a href="#services" className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Services</a>
               <a href="#experience" className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Experience</a>
               <a href="#education" className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Education</a>
               <a href="#projects" className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Projects</a>
@@ -175,15 +202,15 @@ export default function Home() {
           </div>
 
           {/* About Section */}
-          <section id="about" data-aos="fade-up" className="scroll-mt-28 border-b border-black/[0.04] dark:border-white/[0.04] p-8">
+          <section id="about" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
             <h2 className="text-2xl font-medium mb-5 text-zinc-900 dark:text-zinc-100">About</h2>
             <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-[15px]">
-              Hello, Everyone! I am David. I focused on dfocused on building modern, user-friendly applications. Motivated by problem-solving, performance, and lifelong learning.
+              Hello, Everyone! I am David. I focused on building modern, user-friendly applications. Motivated by problem-solving, performance, and lifelong learning.
             </p>
           </section>
 
           {/* Contact Info List Sectin */}
-          <section data-aos="fade-up" className="border-b border-black/[0.04] dark:border-white/[0.04] p-8 flex flex-col gap-5">
+          <section data-aos="fade-up" className="border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8 flex flex-col gap-5">
             <div className="flex items-center gap-4 text-[15px] text-zinc-700 dark:text-zinc-300">
               <div className="w-8 h-8 rounded-lg bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.05] flex items-center justify-center text-zinc-500 dark:text-zinc-400"><Code size={16} /></div>
               <span>Software Developer @ <strong>Anakut Digital Solution</strong></span>
@@ -204,7 +231,7 @@ export default function Home() {
           </section>
 
           {/* Social Section */}
-          <section id="experience" data-aos="fade-up" className="scroll-mt-28 border-b border-black/[0.04] dark:border-white/[0.04] p-8">
+          <section id="experience" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
             <h2 className="text-2xl font-medium mb-5 text-zinc-900 dark:text-zinc-100">Social</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <a href="https://facebook.com" target="_blank" rel="noreferrer" data-aos="zoom-in-up" data-aos-delay="30" className="flex items-center justify-between p-4 rounded-2xl border border-black/[0.04] dark:border-white/[0.04] hover:bg-black/[0.02] dark:hover:bg-white/[0.06] transition-all duration-300 group bg-zinc-50/85 dark:bg-white/[0.04] hover:-translate-y-0.5">
@@ -242,8 +269,8 @@ export default function Home() {
 
               <a href="https://t.me/R4kie" target="_blank" rel="noreferrer" data-aos="zoom-in-up" data-aos-delay="180" className="flex items-center justify-between p-4 rounded-2xl border border-black/[0.04] dark:border-white/[0.04] hover:bg-black/[0.02] dark:hover:bg-white/[0.06] transition-all duration-300 group bg-zinc-50/85 dark:bg-white/[0.04] hover:-translate-y-0.5">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-[#229ED9] text-white rounded-xl flex items-center justify-center">
-                    <SiTelegram size={18} />
+                  <div className="w-10 h-10 bg-black/[0.02] dark:bg-white/[0.03] rounded-xl flex items-center justify-center border border-black/[0.04] dark:border-white/[0.04]">
+                    <SiTelegram size={18} className="text-zinc-700 dark:text-zinc-300" />
                   </div>
                   <div>
                     <h3 className="font-medium text-[15px] text-zinc-900 dark:text-zinc-200">Telegram</h3>
@@ -256,17 +283,17 @@ export default function Home() {
           </section>
 
           {/* Stack Section */}
-          <section id="education" data-aos="fade-up" className="scroll-mt-28 border-b border-black/[0.04] dark:border-white/[0.04] p-8">
+          <section id="education" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
             <h2 className="text-2xl font-medium mb-5 text-zinc-900 dark:text-zinc-100">Stack</h2>
-            <div className="bg-zinc-50/85 dark:bg-white/[0.04] border border-black/[0.04] dark:border-white/[0.04] p-6 rounded-2xl">
-               <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
+            <div className="bg-zinc-50/85 dark:bg-white/[0.04] border border-black/[0.04] dark:border-white/[0.04] p-4 sm:p-6 rounded-2xl">
+               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                  {techStack.map((tech) => (
                     <div
                       key={tech.name}
-                      className="flex items-center gap-3 rounded-xl border border-black/[0.04] dark:border-white/[0.04] px-3 py-2.5 bg-black/[0.02] dark:bg-white/[0.02] hover:bg-black/[0.04] dark:hover:bg-white/[0.04] transition-colors"
+                      className="min-w-0 flex items-center gap-2 sm:gap-3 rounded-xl border border-black/[0.04] dark:border-white/[0.04] px-2.5 sm:px-3 py-2 sm:py-2.5 bg-black/[0.02] dark:bg-white/[0.02] hover:bg-black/[0.04] dark:hover:bg-white/[0.04] transition-colors"
                     >
-                      <tech.icon size={18} className="text-zinc-700 dark:text-zinc-200 shrink-0" />
-                      <span className="text-[13px] font-medium text-zinc-700 dark:text-zinc-300">
+                      <tech.icon size={16} className="text-zinc-700 dark:text-zinc-200 shrink-0 sm:w-[18px] sm:h-[18px]" />
+                      <span className="truncate text-[12px] sm:text-[13px] font-medium text-zinc-700 dark:text-zinc-300">
                         {tech.name}
                       </span>
                     </div>
@@ -276,7 +303,7 @@ export default function Home() {
           </section>
 
           {/* Experience Section */}
-          <section id="experience" data-aos="fade-up" className="scroll-mt-28 border-b border-black/[0.04] dark:border-white/[0.04] p-8">
+          <section id="experience" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
             <h2 className="text-2xl font-medium mb-2 text-zinc-900 dark:text-zinc-100">Experience</h2>
             <p className="text-[14px] text-zinc-500 dark:text-zinc-400 mb-6">
               My professional journey and work experience in web development and technology.
@@ -329,8 +356,30 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Services Section */}
+          <section id="services" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
+            <h2 className="text-2xl font-medium mb-2 text-zinc-900 dark:text-zinc-100">Services</h2>
+            <p className="text-[14px] text-zinc-500 dark:text-zinc-400 mb-6">
+              Services I provide for building modern web applications with responsive and user-friendly experiences.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="border border-black/[0.04] dark:border-white/[0.04] rounded-xl p-4 bg-zinc-50/85 dark:bg-white/[0.04]">
+                <h3 className="font-medium text-[15px] text-zinc-900 dark:text-zinc-100">Modern Web Application Development</h3>
+                <p className="text-[13px] text-zinc-500 mt-2">
+                  Build fast and maintainable web applications using modern frameworks, clean structure, and scalable architecture.
+                </p>
+              </div>
+              <div className="border border-black/[0.04] dark:border-white/[0.04] rounded-xl p-4 bg-zinc-50/85 dark:bg-white/[0.04]">
+                <h3 className="font-medium text-[15px] text-zinc-900 dark:text-zinc-100">Responsive User Experience</h3>
+                <p className="text-[13px] text-zinc-500 mt-2">
+                  Create responsive interfaces that look great on mobile, tablet, and desktop with smooth and intuitive interactions.
+                </p>
+              </div>
+            </div>
+          </section>
+
           {/* Education Section */}
-          <section data-aos="fade-up" className="border-b border-black/[0.04] dark:border-white/[0.04] p-8">
+          <section data-aos="fade-up" className="border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
             <h2 className="text-2xl font-medium mb-2 text-zinc-900 dark:text-zinc-100">Education</h2>
             <p className="text-[14px] text-zinc-500 dark:text-zinc-400 mb-6">
               My educational background and academic journey in technology and web development.
@@ -392,7 +441,7 @@ export default function Home() {
           </section>
 
           {/* Projects Section */}
-          <section id="projects" className="scroll-mt-28 border-b border-black/[0.04] dark:border-white/[0.04] p-8">
+          <section id="projects" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
             <div className="flex items-center gap-2 mb-2">
               <h2 className="text-2xl font-medium text-zinc-900 dark:text-zinc-100">Projects</h2>
               <span className="text-zinc-500 text-sm">(2)</span>
@@ -437,7 +486,7 @@ export default function Home() {
           </section>
           
           {/* Lens Section */}
-          <section data-aos="fade-up" className="border-b border-black/[0.04] dark:border-white/[0.04] p-8 pb-20">
+          <section data-aos="fade-up" className="border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 pb-20 sm:px-8">
              <h2 className="text-2xl font-medium mb-5 text-zinc-900 dark:text-zinc-100">My Gallery</h2>
              <div className="mb-6 flex items-center justify-between gap-3">
                <span className="px-4 py-1.5 bg-zinc-900 text-white text-[13px] rounded-full">
@@ -465,15 +514,37 @@ export default function Home() {
              </div>
           </section>
 
-          <footer className="p-8">
-            <div className="rounded-2xl border border-black/[0.04] dark:border-white/[0.04] bg-zinc-50/85 dark:bg-white/[0.04] px-5 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <p className="text-[13px] text-zinc-500 dark:text-zinc-400">
-                © {new Date().getFullYear()} Phalla David. All rights reserved.
-              </p>
-              <div className="flex items-center gap-4 text-[13px] text-zinc-500 dark:text-zinc-400">
-                <a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">GitHub</a>
-                <a href="https://instagram.com/channarak_lu" target="_blank" rel="noreferrer" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">Instagram</a>
-                <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">Facebook</a>
+          <footer className="px-4 py-8 sm:px-8">
+            <div className="rounded-2xl border border-black/[0.04] dark:border-white/[0.04] bg-zinc-50/85 dark:bg-white/[0.04] p-5 sm:p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+                <div>
+                  <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">Phalla David</p>
+                  <p className="text-[13px] mt-1 text-zinc-500 dark:text-zinc-400">
+                    Building modern, reliable web experiences.
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <a href="https://github.com/phalladavid" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-black/20 dark:hover:border-white/20 transition-colors" aria-label="GitHub">
+                    <GitHubIcon size={16} />
+                  </a>
+                  <a href="https://www.instagram.com/daviqq____/" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-black/20 dark:hover:border-white/20 transition-colors" aria-label="Instagram">
+                    <InstagramIcon size={16} />
+                  </a>
+                  <a href="https://facebook.com" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-black/20 dark:hover:border-white/20 transition-colors" aria-label="Facebook">
+                    <FacebookIcon size={16} />
+                  </a>
+                </div>
+              </div>
+              <div className="mt-5 pt-4 border-t border-black/5 dark:border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <p className="text-[12px] text-zinc-500 dark:text-zinc-400">
+                  © {new Date().getFullYear()} Phalla David. All rights reserved.
+                </p>
+                <div className="flex items-center gap-4 text-[12px] text-zinc-500 dark:text-zinc-400">
+                  <a href="#about" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">About</a>
+                  <a href="#services" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Services</a>
+                  <a href="#projects" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Projects</a>
+                  <a href="mailto:phalladavidd@gmail.com" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Contact</a>
+                </div>
               </div>
             </div>
           </footer>
@@ -499,11 +570,30 @@ export default function Home() {
             <ChevronDown size={28} className="rotate-90" />
           </button>
 
-          <img
-            src={lensImages[activeLensIndex]}
-            alt="Lens preview"
-            className="max-w-full max-h-[85vh] rounded-2xl object-contain"
-          />
+          <div className="w-full max-w-5xl flex flex-col items-center gap-4">
+            <div className="text-white/75 text-[13px]">
+              {activeLensIndex + 1} / {lensImages.length}
+            </div>
+            <img
+              src={lensImages[activeLensIndex]}
+              alt="Lens preview"
+              className="max-w-full max-h-[68vh] rounded-2xl object-contain"
+            />
+            <div className="w-full overflow-x-auto">
+              <div className="mx-auto w-max flex items-center gap-2 px-1">
+                {lensImages.map((image, i) => (
+                  <button
+                    key={`thumb-${image}`}
+                    onClick={() => setActiveLensIndex(i)}
+                    aria-label={`Preview image ${i + 1}`}
+                    className={`w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden border transition-all ${i === activeLensIndex ? "border-white scale-105" : "border-white/25 hover:border-white/60"}`}
+                  >
+                    <img src={image} alt={`Lens thumbnail ${i + 1}`} className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
 
           <button
             onClick={goToNextLens}
@@ -516,19 +606,19 @@ export default function Home() {
       )}
 
       {/* Back to Top */}
-      <button 
-        onClick={scrollToTop} 
-        className="fixed bottom-32 right-8 w-10 h-10 bg-white dark:bg-zinc-800 border border-black/10 dark:border-white/10 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-300 shadow-md hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors z-40 hidden sm:flex"
+      <button
+        onClick={scrollToTop}
+        aria-label="Back to top"
+        className={`fixed bottom-28 sm:bottom-32 right-4 sm:right-8 w-11 h-11 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-200 border border-black/10 dark:border-white/15 bg-white/90 dark:bg-zinc-800/85 backdrop-blur-md shadow-[0_10px_24px_-12px_rgba(0,0,0,0.45)] hover:bg-white dark:hover:bg-zinc-700 transition-all duration-300 z-40 ${showScrollTop ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-3 pointer-events-none"}`}
       >
-        <ChevronUp size={20} />
+        <ChevronUp size={19} />
       </button>
 
       {/* Bottom Sticky Action Bar */}
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-[768px] px-8 z-50 pointer-events-none">
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-[768px] px-4 sm:px-8 z-50 pointer-events-none">
         <div className="w-full flex gap-3 pointer-events-auto">
-          <a href="https://t.me/" target="_blank" rel="noreferrer" className="flex-1 py-2.5 px-4 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 border border-black/10 dark:border-white/20 transition-all flex items-center justify-center gap-2 text-[14px] font-medium shadow-xl hover:bg-zinc-800 dark:hover:bg-zinc-100">
+          <a href="https://t.me/R4kie" target="_blank" rel="noreferrer" className="flex-1 py-2.5 px-4 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 border border-black/10 dark:border-white/20 transition-all flex items-center justify-center gap-2 text-[14px] font-medium shadow-xl hover:bg-zinc-800 dark:hover:bg-zinc-100">
             <Hand size={15} />
-            <SiTelegram size={16} />
             Get in touch
           </a>
           <a href="mailto:phalladavidd@gmail.com" className="flex-1 py-2.5 px-4 rounded-full bg-white/95 dark:bg-zinc-800 border border-black/10 dark:border-white/10 transition-all flex items-center justify-center gap-2 text-[14px] font-medium text-zinc-800 dark:text-zinc-200 shadow-xl hover:bg-zinc-100 dark:hover:bg-zinc-700">
@@ -550,8 +640,8 @@ const techStack = [
   { name: "Laravel", icon: SiLaravel },
   { name: "ChatGPT", icon: SiOpenai },
   { name: "Claude", icon: SiClaude },
-  { name: "VS Code", icon: SiVscodium },
-  { name: "Cursor", icon: SiClaude },
+  { name: "VS Code", icon: VscVscode },
+  { name: "Cursor", icon: CursorLogoIcon },
 ];
 
 const lensImages = [
@@ -646,21 +736,23 @@ const GitHubIcon = ({ size = 20, className }: SocialIconProps) => (
 );
 
 const VerifiedBadge = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="22"
-    height="22"
-    viewBox="0 0 24 24"
-    aria-hidden="true"
-  >
-    <circle cx="12" cy="12" r="10" fill="#3B82F6" />
-    <path
-      d="M8 12.5l2.3 2.3L16.5 9"
+  <span className="relative inline-flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-sky-400 to-blue-600 shadow-[0_6px_16px_-8px_rgba(37,99,235,0.8)] ring-2 ring-white/80 dark:ring-zinc-900">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="13"
+      height="13"
+      viewBox="0 0 20 20"
       fill="none"
-      stroke="#fff"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
+      aria-hidden="true"
+    >
+      <path
+        d="M5 10.5 8.2 13.6 15 6.8"
+        stroke="white"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+    <span className="absolute -inset-[1px] rounded-full border border-white/20 dark:border-white/30" />
+  </span>
 );

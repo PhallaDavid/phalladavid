@@ -17,8 +17,9 @@ export const metadata: Metadata = {
   title: "Phalla David - Software Developer",
   description: "Software Developer",
   icons: {
-    icon: "/imgaes/C5725E55-54EF-4952-91F5-7E25040B5672_1_105_c.jpeg",
-    apple: "/imgaes/C5725E55-54EF-4952-91F5-7E25040B5672_1_105_c.jpeg",
+    icon: [{ url: "/imgaes/image.png", type: "image/png" }],
+    shortcut: ["/imgaes/image.png"],
+    apple: [{ url: "/imgaes/image.png", type: "image/png" }],
   },
 };
 
@@ -34,7 +35,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
         </ThemeProvider>
       </body>
