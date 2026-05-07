@@ -172,31 +172,32 @@ export default function Home() {
             <div className="hidden md:flex items-center gap-5">
               <a 
                 href="#about" 
-                className={`transition-colors ${activeSection === "about" ? "text-zinc-900 dark:text-zinc-100 font-medium underline underline-offset-8 decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+                className={`transition-colors ${activeSection === "about" ? "text-zinc-900 dark:text-zinc-100 font-medium underline  decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
               >
                 About
               </a>
+             
               <a 
+                href="#experience" 
+                className={`transition-colors ${activeSection === "experience" ? "text-zinc-900 dark:text-zinc-100 font-medium underline  decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+              >
+                Experience
+              </a>
+               <a 
                 href="#services" 
-                className={`transition-colors ${activeSection === "services" ? "text-zinc-900 dark:text-zinc-100 font-medium underline underline-offset-8 decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+                className={`transition-colors ${activeSection === "services" ? "text-zinc-900 dark:text-zinc-100 font-medium underline  decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
               >
                 Services
               </a>
               <a 
-                href="#experience" 
-                className={`transition-colors ${activeSection === "experience" ? "text-zinc-900 dark:text-zinc-100 font-medium underline underline-offset-8 decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
-              >
-                Experience
-              </a>
-              <a 
                 href="#education" 
-                className={`transition-colors ${activeSection === "education" ? "text-zinc-900 dark:text-zinc-100 font-medium underline underline-offset-8 decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+                className={`transition-colors ${activeSection === "education" ? "text-zinc-900 dark:text-zinc-100 font-medium underline  decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
               >
                 Education
               </a>
               <a 
                 href="#projects" 
-                className={`transition-colors ${activeSection === "projects" ? "text-zinc-900 dark:text-zinc-100 font-medium underline underline-offset-8 decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+                className={`transition-colors ${activeSection === "projects" ? "text-zinc-900 dark:text-zinc-100 font-medium underline  decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
               >
                 Projects
               </a>
