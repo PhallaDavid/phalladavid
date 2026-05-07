@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   title: "Phalla David - Software Developer",
   description: "Software Developer",
   icons: {
-    icon: [{ url: "/imgaes/image.png", type: "image/png" }],
-    shortcut: ["/imgaes/image.png"],
-    apple: [{ url: "/imgaes/image.png", type: "image/png" }],
+    icon: [{ url: "/len/E5A3DC0A-CD3E-4464-BFF1-75613D346D6D_1_105_c.jpeg", type: "image/png" }],
+    shortcut: ["/len/E5A3DC0A-CD3E-4464-BFF1-75613D346D6D_1_105_c.jpeg"],
+    apple: [{ url: "/len/E5A3DC0A-CD3E-4464-BFF1-75613D346D6D_1_105_c.jpeg", type: "image/png" }],
   },
 };
 

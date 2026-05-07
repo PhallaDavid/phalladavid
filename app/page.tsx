@@ -172,32 +172,32 @@ export default function Home() {
             <div className="hidden md:flex items-center gap-5">
               <a 
                 href="#about" 
-                className={`transition-colors ${activeSection === "about" ? "text-zinc-900 dark:text-zinc-100 font-medium underline  decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+                className={`transition-colors ${activeSection === "about" ? "text-zinc-900 dark:text-zinc-100 font-medium" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
               >
                 About
               </a>
              
               <a 
                 href="#experience" 
-                className={`transition-colors ${activeSection === "experience" ? "text-zinc-900 dark:text-zinc-100 font-medium underline  decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+                className={`transition-colors ${activeSection === "experience" ? "text-zinc-900 dark:text-zinc-100 font-medium" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
               >
                 Experience
               </a>
                <a 
                 href="#services" 
-                className={`transition-colors ${activeSection === "services" ? "text-zinc-900 dark:text-zinc-100 font-medium underline  decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+                className={`transition-colors ${activeSection === "services" ? "text-zinc-900 dark:text-zinc-100 font-medium" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
               >
                 Services
               </a>
               <a 
                 href="#education" 
-                className={`transition-colors ${activeSection === "education" ? "text-zinc-900 dark:text-zinc-100 font-medium underline  decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+                className={`transition-colors ${activeSection === "education" ? "text-zinc-900 dark:text-zinc-100 font-medium" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
               >
                 Education
               </a>
               <a 
                 href="#projects" 
-                className={`transition-colors ${activeSection === "projects" ? "text-zinc-900 dark:text-zinc-100 font-medium underline  decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+                className={`transition-colors ${activeSection === "projects" ? "text-zinc-900 dark:text-zinc-100 font-medium" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
               >
                 Projects
               </a>
@@ -317,7 +317,7 @@ export default function Home() {
           <section id="social" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
             <h2 className="text-2xl font-medium mb-5 text-zinc-900 dark:text-zinc-100">Social</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" data-aos="zoom-in-up" data-aos-delay="30" className="flex items-center justify-between p-4 rounded-2xl border border-black/[0.04] dark:border-white/[0.04] hover:bg-black/[0.02] dark:hover:bg-white/[0.06] transition-all duration-300 group bg-zinc-50/85 dark:bg-white/[0.04] hover:-translate-y-0.5">
+              <a href="https://www.facebook.com/phalla.david.31/" target="_blank" rel="noreferrer" data-aos="zoom-in-up" data-aos-delay="30" className="flex items-center justify-between p-4 rounded-2xl border border-black/[0.04] dark:border-white/[0.04] hover:bg-black/[0.02] dark:hover:bg-white/[0.06] transition-all duration-300 group bg-zinc-50/85 dark:bg-white/[0.04] hover:-translate-y-0.5 no-underline">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 bg-black/[0.02] dark:bg-white/[0.03] rounded-xl flex items-center justify-center border border-black/[0.04] dark:border-white/[0.04]"><FacebookIcon size={20} className="text-zinc-700 dark:text-zinc-300" /></div>
                   <div>
@@ -613,7 +613,7 @@ export default function Home() {
                   <a href="https://www.instagram.com/daviqq____/" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-black/20 dark:hover:border-white/20 transition-colors" aria-label="Instagram">
                     <InstagramIcon size={16} />
                   </a>
-                  <a href="https://facebook.com" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-black/20 dark:hover:border-white/20 transition-colors" aria-label="Facebook">
+                  <a href="https://www.facebook.com/phalla.david.31/" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-black/20 dark:hover:border-white/20 transition-colors no-underline" aria-label="Facebook">
                     <FacebookIcon size={16} />
                   </a>
                 </div>
