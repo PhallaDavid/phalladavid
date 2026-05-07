@@ -56,6 +56,7 @@ export default function Home() {
   const [isScrolling, setIsScrolling] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [activeSection, setActiveSection] = useState("about");
 
   useEffect(() => {
     AOS.init({
@@ -105,6 +106,32 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+    const sections = ["about", "experience", "education", "services", "projects"];
+    
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -143,11 +170,36 @@ export default function Home() {
           </div>
           <nav className="flex items-center gap-5 text-sm text-zinc-500 dark:text-zinc-400">
             <div className="hidden md:flex items-center gap-5">
-              <a href="#about" className="text-zinc-900 dark:text-zinc-100 font-medium">About</a>
-              <a href="#services" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">Services</a>
-              <a href="#experience" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors font-medium text-zinc-900 dark:text-zinc-100">Experience</a>
-              <a href="#education" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">Education</a>
-              <a href="#projects" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">Projects</a>
+              <a 
+                href="#about" 
+                className={`transition-colors ${activeSection === "about" ? "text-zinc-900 dark:text-zinc-100 font-medium underline underline-offset-8 decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+              >
+                About
+              </a>
+              <a 
+                href="#services" 
+                className={`transition-colors ${activeSection === "services" ? "text-zinc-900 dark:text-zinc-100 font-medium underline underline-offset-8 decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+              >
+                Services
+              </a>
+              <a 
+                href="#experience" 
+                className={`transition-colors ${activeSection === "experience" ? "text-zinc-900 dark:text-zinc-100 font-medium underline underline-offset-8 decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+              >
+                Experience
+              </a>
+              <a 
+                href="#education" 
+                className={`transition-colors ${activeSection === "education" ? "text-zinc-900 dark:text-zinc-100 font-medium underline underline-offset-8 decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+              >
+                Education
+              </a>
+              <a 
+                href="#projects" 
+                className={`transition-colors ${activeSection === "projects" ? "text-zinc-900 dark:text-zinc-100 font-medium underline underline-offset-8 decoration-2 decoration-zinc-900 dark:decoration-zinc-100" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"}`}
+              >
+                Projects
+              </a>
             </div>
             <div className="flex items-center gap-3 md:ml-4 md:pl-4 border-l border-transparent md:border-black/[0.04] md:dark:border-white/[0.04]">
               <a href="https://github.com/phalladavid" target="_blank" rel="noreferrer" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"><GitHubIcon size={18} /></a>
@@ -166,11 +218,41 @@ export default function Home() {
               <X size={28} />
             </button>
             <nav className="flex flex-col items-center gap-10 text-2xl tracking-tight">
-              <a href="#about" className="font-medium text-zinc-900 dark:text-zinc-100" onClick={() => setIsMobileMenuOpen(false)}>About</a>
-              <a href="#services" className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Services</a>
-              <a href="#experience" className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Experience</a>
-              <a href="#education" className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Education</a>
-              <a href="#projects" className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Projects</a>
+              <a 
+                href="#about" 
+                className={`font-medium transition-colors ${activeSection === "about" ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-500 dark:text-zinc-400"}`} 
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About
+              </a>
+              <a 
+                href="#services" 
+                className={`font-medium transition-colors ${activeSection === "services" ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-500 dark:text-zinc-400"}`} 
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Services
+              </a>
+              <a 
+                href="#experience" 
+                className={`font-medium transition-colors ${activeSection === "experience" ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-500 dark:text-zinc-400"}`} 
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Experience
+              </a>
+              <a 
+                href="#education" 
+                className={`font-medium transition-colors ${activeSection === "education" ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-500 dark:text-zinc-400"}`} 
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Education
+              </a>
+              <a 
+                href="#projects" 
+                className={`font-medium transition-colors ${activeSection === "projects" ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-500 dark:text-zinc-400"}`} 
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Projects
+              </a>
             </nav>
           </div>
         )}
@@ -231,7 +313,7 @@ export default function Home() {
           </section>
 
           {/* Social Section */}
-          <section id="experience" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
+          <section id="social" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
             <h2 className="text-2xl font-medium mb-5 text-zinc-900 dark:text-zinc-100">Social</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <a href="https://facebook.com" target="_blank" rel="noreferrer" data-aos="zoom-in-up" data-aos-delay="30" className="flex items-center justify-between p-4 rounded-2xl border border-black/[0.04] dark:border-white/[0.04] hover:bg-black/[0.02] dark:hover:bg-white/[0.06] transition-all duration-300 group bg-zinc-50/85 dark:bg-white/[0.04] hover:-translate-y-0.5">
@@ -283,7 +365,7 @@ export default function Home() {
           </section>
 
           {/* Stack Section */}
-          <section id="education" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
+          <section id="stack" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
             <h2 className="text-2xl font-medium mb-5 text-zinc-900 dark:text-zinc-100">Stack</h2>
             <div className="bg-zinc-50/85 dark:bg-white/[0.04] border border-black/[0.04] dark:border-white/[0.04] p-4 sm:p-6 rounded-2xl">
                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -379,7 +461,7 @@ export default function Home() {
           </section>
 
           {/* Education Section */}
-          <section data-aos="fade-up" className="border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
+          <section id="education" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
             <h2 className="text-2xl font-medium mb-2 text-zinc-900 dark:text-zinc-100">Education</h2>
             <p className="text-[14px] text-zinc-500 dark:text-zinc-400 mb-6">
               My educational background and academic journey in technology and web development.
