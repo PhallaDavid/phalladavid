@@ -1,6 +1,4 @@
 <h1 align="center">Hi 👋, I'm David</h1>
-<h3 align="center">Full Stack Web Developer from Cambodia 🇰🇭</h3>
-
 <p align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=24&pause=1000&center=true&vCenter=true&width=600&lines=Full+Stack+Web+Developer;Vue.js+%7C+Nuxt.js+%7C+Next.js;Laravel+%7C+TypeScript+%7C+PHP;Always+Learning+New+Technologies" />
 </p>
