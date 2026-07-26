@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { HeroVideoDialog } from "@/components/ui/hero-video-dialog";
 import { 
   Code, MapPin, Phone, Mail, Link as LinkIcon, Hand,
   Send,
@@ -8,6 +9,9 @@ import {
   ChevronDown, ChevronUp, Menu, X
 } from "lucide-react";
 import {
+  SiReact,
+  SiNextdotjs,
+  SiFirebase,
   SiGithub,
   SiVuedotjs,
   SiNuxt,
@@ -23,6 +27,7 @@ import { VscVscode } from "react-icons/vsc";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Marquee } from "@/components/ui/marquee";
 
 const CursorLogoIcon = ({ size = 20, className }: { size?: number; className?: string }) => (
   <svg
@@ -51,7 +56,6 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [titleIndex, setTitleIndex] = useState(0);
   const [isTitleVisible, setIsTitleVisible] = useState(true);
-  const [activeLensIndex, setActiveLensIndex] = useState<number | null>(null);
   const [isLensExpanded, setIsLensExpanded] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -134,20 +138,6 @@ export default function Home() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const goToPreviousLens = () => {
-    setActiveLensIndex((prev) => {
-      if (prev === null) return prev;
-      return prev === 0 ? lensImages.length - 1 : prev - 1;
-    });
-  };
-
-  const goToNextLens = () => {
-    setActiveLensIndex((prev) => {
-      if (prev === null) return prev;
-      return prev === lensImages.length - 1 ? 0 : prev + 1;
-    });
   };
 
   return (
@@ -260,6 +250,7 @@ export default function Home() {
 
 
         <main className="flex flex-col w-full">
+
           {/* Profile Card / Header */}
           <div data-aos="fade-up" className="flex items-center justify-center py-12 border-b border-black/[0.04] dark:border-white/[0.04]">
             <div className="flex flex-col items-center gap-5">
@@ -368,20 +359,37 @@ export default function Home() {
           {/* Stack Section */}
           <section id="stack" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
             <h2 className="text-2xl font-medium mb-5 text-zinc-900 dark:text-zinc-100">Stack</h2>
-            <div className="bg-zinc-50/85 dark:bg-white/[0.04] border border-black/[0.04] dark:border-white/[0.04] p-4 sm:p-6 rounded-2xl">
-               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-                 {techStack.map((tech) => (
-                    <div
-                      key={tech.name}
-                      className="min-w-0 flex items-center gap-2 sm:gap-3 rounded-xl border border-black/[0.04] dark:border-white/[0.04] px-2.5 sm:px-3 py-2 sm:py-2.5 bg-black/[0.02] dark:bg-white/[0.02] hover:bg-black/[0.04] dark:hover:bg-white/[0.04] transition-colors"
-                    >
-                      <tech.icon size={16} className="text-zinc-700 dark:text-zinc-200 shrink-0 sm:w-[18px] sm:h-[18px]" />
-                      <span className="truncate text-[12px] sm:text-[13px] font-medium text-zinc-700 dark:text-zinc-300">
-                        {tech.name}
-                      </span>
-                    </div>
-                 ))}
-               </div>
+            <div className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-2xl border border-black/[0.04] dark:border-white/[0.04] bg-zinc-50/85 dark:bg-white/[0.04] py-6 sm:py-8">
+              <Marquee pauseOnHover className="[--duration:28s]">
+                {techStackFirstRow.map((tech) => (
+                  <div
+                    key={tech.name}
+                    className="flex items-center gap-2.5 rounded-xl border border-black/[0.06] dark:border-white/[0.08] px-4 py-2.5 bg-white dark:bg-zinc-800/90 shadow-xs hover:scale-105 hover:border-black/20 dark:hover:border-white/20 transition-all duration-200 cursor-pointer"
+                  >
+                    <tech.icon size={20} className="shrink-0 text-zinc-800 dark:text-zinc-200" />
+                    <span className="text-[13px] sm:text-sm font-medium text-zinc-800 dark:text-zinc-200 whitespace-nowrap">
+                      {tech.name}
+                    </span>
+                  </div>
+                ))}
+              </Marquee>
+
+              <Marquee reverse pauseOnHover className="[--duration:28s] mt-3">
+                {techStackSecondRow.map((tech) => (
+                  <div
+                    key={tech.name}
+                    className="flex items-center gap-2.5 rounded-xl border border-black/[0.06] dark:border-white/[0.08] px-4 py-2.5 bg-white dark:bg-zinc-800/90 shadow-xs hover:scale-105 hover:border-black/20 dark:hover:border-white/20 transition-all duration-200 cursor-pointer"
+                  >
+                    <tech.icon size={20} className="shrink-0 text-zinc-800 dark:text-zinc-200" />
+                    <span className="text-[13px] sm:text-sm font-medium text-zinc-800 dark:text-zinc-200 whitespace-nowrap">
+                      {tech.name}
+                    </span>
+                  </div>
+                ))}
+              </Marquee>
+
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-zinc-50/90 dark:from-[#0d0d0d] to-transparent z-10"></div>
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-zinc-50/90 dark:from-[#0d0d0d] to-transparent z-10"></div>
             </div>
           </section>
 
@@ -527,7 +535,7 @@ export default function Home() {
           <section id="projects" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
             <div className="flex items-center gap-2 mb-2">
               <h2 className="text-2xl font-medium text-zinc-900 dark:text-zinc-100">Projects</h2>
-              <span className="text-zinc-500 text-sm">(2)</span>
+              <span className="text-zinc-500 text-sm">({projectEntries.length})</span>
             </div>
             <p className="text-[14px] text-zinc-500 dark:text-zinc-400 mb-6">
               Real projects I built across e-commerce and digital menu platforms.
@@ -586,13 +594,15 @@ export default function Home() {
              
              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {(isLensExpanded ? lensImages : lensImages.slice(0, 6)).map((image, i) => (
-                <button
+                <HeroVideoDialog
                   key={image}
-                  onClick={() => setActiveLensIndex(i)}
-                  className="aspect-[4/5] rounded-2xl bg-zinc-100 dark:bg-zinc-800 overflow-hidden border border-black/[0.04] dark:border-white/[0.04] cursor-zoom-in"
-                >
-                  <img src={image} alt="Lens item" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
-                </button>
+                  videoSrc={image}
+                  thumbnailSrc={image}
+                  thumbnailAlt={`Lens item ${i + 1}`}
+                  animationStyle="from-center"
+                  className="aspect-[4/5] rounded-2xl bg-zinc-100 dark:bg-zinc-800"
+                  thumbnailClassName="rounded-2xl border border-black/[0.04] dark:border-white/[0.04]"
+                />
                ))}
              </div>
           </section>
@@ -634,60 +644,6 @@ export default function Home() {
 
         </main>
       </div>
-
-      {activeLensIndex !== null && (
-        <div className="fixed inset-0 z-[80] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <button
-            onClick={() => setActiveLensIndex(null)}
-            className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
-            aria-label="Close image dialog"
-          >
-            <X size={28} />
-          </button>
-
-          <button
-            onClick={goToPreviousLens}
-            className="absolute left-4 sm:left-8 text-white/80 hover:text-white transition-colors"
-            aria-label="Previous image"
-          >
-            <ChevronDown size={28} className="rotate-90" />
-          </button>
-
-          <div className="w-full max-w-5xl flex flex-col items-center gap-4">
-            <div className="text-white/75 text-[13px]">
-              {activeLensIndex + 1} / {lensImages.length}
-            </div>
-            <img
-              src={lensImages[activeLensIndex]}
-              alt="Lens preview"
-              className="max-w-full max-h-[68vh] rounded-2xl object-contain"
-            />
-            <div className="w-full overflow-x-auto">
-              <div className="mx-auto w-max flex items-center gap-2 px-1">
-                {lensImages.map((image, i) => (
-                  <button
-                    key={`thumb-${image}`}
-                    onClick={() => setActiveLensIndex(i)}
-                    aria-label={`Preview image ${i + 1}`}
-                    className={`w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden border transition-all ${i === activeLensIndex ? "border-white scale-105" : "border-white/25 hover:border-white/60"}`}
-                  >
-                    <img src={image} alt={`Lens thumbnail ${i + 1}`} className="w-full h-full object-cover" />
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <button
-            onClick={goToNextLens}
-            className="absolute right-4 sm:right-8 text-white/80 hover:text-white transition-colors"
-            aria-label="Next image"
-          >
-            <ChevronDown size={28} className="-rotate-90" />
-          </button>
-        </div>
-      )}
-
       {/* Back to Top */}
       <button
         onClick={scrollToTop}
@@ -713,14 +669,20 @@ export default function Home() {
   );
 }
 
-const techStack = [
-  { name: "GitHub", icon: SiGithub },
-  { name: "Vue.js", icon: SiVuedotjs },
-  { name: "Nuxt.js", icon: SiNuxt },
+const techStackFirstRow = [
+  { name: "React", icon: SiReact },
+  { name: "Next.js", icon: SiNextdotjs },
+  { name: "Firebase", icon: SiFirebase },
   { name: "TypeScript", icon: SiTypescript },
   { name: "Tailwind CSS", icon: SiTailwindcss },
+  { name: "Vue.js", icon: SiVuedotjs },
+  { name: "Nuxt.js", icon: SiNuxt },
+];
+
+const techStackSecondRow = [
   { name: "Node.js", icon: SiNodedotjs },
   { name: "Laravel", icon: SiLaravel },
+  { name: "GitHub", icon: SiGithub },
   { name: "ChatGPT", icon: SiOpenai },
   { name: "Claude", icon: SiClaude },
   { name: "VS Code", icon: VscVscode },
@@ -743,6 +705,46 @@ const lensImages = [
 
 const projectEntries = [
   {
+    title: "QuickSell (Peer-to-Peer Marketplace)",
+    date: "2026 — Present",
+    description:
+      "Designed and implemented a full-featured e-commerce marketplace allowing users to register accounts, list products for sale, and manage store inventories. Features multi-language localization (English & Khmer), dark mode, real-time seller chat, and responsive UI built with Next.js, Material UI, and Tailwind CSS.",
+    skills: ["Next.js", "Material UI", "Tailwind CSS", "TypeScript", "React", "Dark Mode", "i18n", "Marketplace"],
+    image: "/imgaes/quicksell.png",
+    thumbnailAlt: "Thumbnail for QuickSell Marketplace",
+    url: "https://quicksell-m953dxdyn-phalladavids-projects.vercel.app/",
+  },
+  {
+    title: "GO QR (AI-Powered QR Generator)",
+    date: "2026 — Present",
+    description:
+      "Designed and developed a custom QR code generator platform using Next.js and Tailwind CSS. Enables users to generate, style, and customize branded QR codes (frames, modules, logo overlays, sizes, and borders) with real-time previews and instant downloads.",
+    skills: ["Next.js", "Tailwind CSS", "TypeScript", "React", "QR Generator", "UI Design", "Vercel"],
+    image: "/imgaes/goqr.png",
+    thumbnailAlt: "Thumbnail for GO QR Generator",
+    url: "https://goqr-eight.vercel.app/",
+  },
+  {
+    title: "JongJam (Notes & Task Workspace)",
+    date: "2026 — Present",
+    description:
+      "Created an all-in-one productivity workspace combining customizable note-taking and task management. Features Google Authentication via Firebase, custom note creation, task organization, and a clean responsive interface powered by Next.js, Tailwind CSS, and shadcn/ui.",
+    skills: ["Next.js", "Firebase", "shadcn/ui", "Tailwind CSS", "TypeScript", "Google Auth", "Notes App", "Task Management"],
+    image: "/imgaes/jongjam.png",
+    thumbnailAlt: "Thumbnail for JongJam Productivity Workspace",
+    url: "https://jongjam.vercel.app/",
+  },
+  {
+    title: "Real-Time Chat Application",
+    date: "2026 — Present",
+    description:
+      "Built a modern real-time chat application featuring Google Authentication with Firebase, direct and group messaging, message deletion, and a clean responsive interface powered by Next.js and shadcn/ui.",
+    skills: ["Next.js", "Firebase", "shadcn/ui", "Tailwind CSS", "TypeScript", "Google Auth", "Real-Time Chat"],
+    image: "/imgaes/realtime-chat.png",
+    thumbnailAlt: "Thumbnail for Real-Time Chat Application",
+    url: "https://realtimechat-qdgj.vercel.app/",
+  },
+  {
     title: "E-commerce Web Application",
     date: "Jan 2026 — Present",
     description:
@@ -751,16 +753,6 @@ const projectEntries = [
     image: "/imgaes/image.png",
     thumbnailAlt: "Thumbnail for E-commerce Web Application",
     url: "https://ecommerce-store-rouge-seven.vercel.app/",
-  },
-  {
-    title: "QR Menu Digital (K&H Coffee)",
-    date: "Sep 2025 — Oct 2025",
-    description:
-      "Built a digital QR menu platform for coffee shops to display products, prices, and categories on mobile devices. Focused on fast loading, clean UI, and easy content updates for staff.",
-    skills: ["Nuxt.js", "Laravel", "Tailwind CSS", "MySQL", "QR Menu"],
-    image: "/imgaes/image copy.png",
-    thumbnailAlt: "Thumbnail for K&H Coffee",
-    url: "https://emenu-6rrl.vercel.app/",
   },
 ];
 

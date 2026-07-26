@@ -4,13 +4,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --dash: rgba(15, 23, 42, 0.08);
 }
 
 .dark {
   --background: #0b0f19;
   --foreground: #ededed;
-  --dash: rgba(255, 255, 255, 0.1);
 }
 
 @theme inline {
@@ -23,12 +21,44 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  background-image: repeating-linear-gradient(
-    -45deg,
-    var(--dash),
-    var(--dash) 1px,
-    transparent 1px,
-    transparent 16px
-  );
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(calc(-100% - var(--gap, 0.75rem)));
+  }
+}
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(calc(-100% - var(--gap, 0.75rem)));
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration, 25s) linear infinite !important;
+}
+
+.animate-marquee-reverse {
+  animation: marquee var(--duration, 25s) linear infinite reverse !important;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration, 25s) linear infinite !important;
+}
+
+.animate-marquee-vertical-reverse {
+  animation: marquee-vertical var(--duration, 25s) linear infinite reverse !important;
+}
+
+
+
