@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { HeroVideoDialog } from "@/components/ui/hero-video-dialog";
+import { GithubContributions } from "@/components/GithubContributions";
 import { 
   Code, MapPin, Phone, Mail, Link as LinkIcon, Hand,
   Send,
@@ -51,6 +52,7 @@ const CursorLogoIcon = ({ size = 20, className }: { size?: number; className?: s
     />
   </svg>
 );
+
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -148,6 +150,7 @@ export default function Home() {
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
+      
       <div className="max-w-[768px] mx-auto border-x border-black/[0.04] dark:border-white/[0.04] min-h-screen flex flex-col relative">
         
         <header className="sticky top-0 z-50 flex items-center justify-between px-4 sm:px-6 pt-6 pb-4 bg-zinc-50/85 dark:bg-white/[0.04] backdrop-blur-md border-b border-black/[0.04] dark:border-white/[0.04] transition-colors duration-300">
@@ -281,6 +284,39 @@ export default function Home() {
             <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-[15px]">
               Hello, Everyone! I am David. I focused on building modern, user-friendly applications. Motivated by problem-solving, performance, and lifelong learning.
             </p>
+          </section>
+          {/* GitHub Contributions Section */}
+          <section id="contributions" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-2xl font-medium text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
+                Contributions
+              </h2>
+              <a
+                href="https://github.com/phalladavid"
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs font-mono text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 flex items-center gap-1 transition-colors"
+              >
+                @phalladavid1
+                <ArrowUpRight size={14} />
+              </a>
+            </div>
+            <GithubContributions username="phalladavid" />
+          </section>
+
+          {/* Spotify Music Section */}
+          <section id="music" data-aos="fade-up" className="scroll-mt-28 border-b border-dashed border-black/[0.04] dark:border-white/[0.04] px-4 py-8 sm:px-8">
+            <iframe
+              title="Spotify Embed: Recommendation Playlist "
+              src={`https://open.spotify.com/embed/playlist/0tvuSxVy4c1qMlVlUs0wYJ?utm_source=generator&theme=0`}
+              width="100%"
+              height="100%"
+              style={{ minHeight: '360px' }}
+              frameBorder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              className="rounded-2xl overflow-hidden shadow-xs border border-black/[0.04] dark:border-white/[0.04]"
+            />
           </section>
 
           {/* Contact Info List Sectin */}
